@@ -3,7 +3,7 @@ package usecase
 import (
 	"time"
 
-	entity "github.com/vinisbitten/learning-clean-arch/01/domain/entities"
+	entity "github.com/vinisbitten/learning-clean-arch/01/internal/domain"
 )
 
 // MealService defines the methods for meal planning
