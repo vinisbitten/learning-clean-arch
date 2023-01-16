@@ -5,13 +5,16 @@ import (
 	"time"
 
 	entity "github.com/vinisbitten/learning-clean-arch/01/domain/entities"
-	"github.com/vinisbitten/learning-clean-arch/01/domain/repository"
+	"github.com/vinisbitten/learning-clean-arch/01/domain/infra/local-repo"
 	usecase "github.com/vinisbitten/learning-clean-arch/01/domain/usecases"
 )
 
 func main() {
 	// Create a meal repository (firebase in this case)
-	repository := &repository.Repo{}
+	repository := &repository.LocalRepository{}
+
+	// Initialize the repository
+	go repository.Init()
 
 	// Create a meal service
 	service := &usecase.MealService{Repository: repository}
