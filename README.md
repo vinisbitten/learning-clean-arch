@@ -11,3 +11,5 @@ every usecase will have its input DTO and output DTO
 the usecase integration tests uses the sequelize model but the usecase itself does not know about the database and is independent of it
 
 the usecase unit test mocks the repository and doesn't depend on any external resource
+
+note that the update input and output DTOs have the same structure but cannot be the same, because both have different purposes and can change independently
