@@ -49,7 +49,7 @@ describe("Order repository test", () => {
       1,
       "City 1",
       "State 1",
-      "Zipcode 1"
+      "ZipCode 1"
     );
     customer.changeAddress(address);
     await customerRepository.create(customer);
@@ -71,14 +71,14 @@ describe("Order repository test", () => {
 
     const orderModel = await OrderModel.findOne({
       where: { id: order.id },
-      include: ["itens"],
+      include: ["items"],
     });
 
     expect(orderModel.toJSON()).toStrictEqual({
       id: "123",
       customer_id: "123",
       total: order.total(),
-      itens: [
+      items: [
         {
           id: orderItem.id,
           name: orderItem.name,
@@ -102,7 +102,7 @@ describe("Order repository test", () => {
       1,
       "City 1",
       "State 1",
-      "Zipcode 1"
+      "ZipCode 1"
     );
     customer.changeAddress(address);
     await customerRepository.create(customer);
@@ -139,14 +139,14 @@ describe("Order repository test", () => {
 
     const orderModel = await OrderModel.findOne({
       where: { id: order.id },
-      include: ["itens"],
+      include: ["items"],
     });
 
     expect(orderModel.toJSON()).toStrictEqual({
       id: "123",
       customer_id: "123",
       total: order.total(),
-      itens: [
+      items: [
         {
           id: orderItem.id,
           name: orderItem.name,
@@ -178,7 +178,7 @@ describe("Order repository test", () => {
       1,
       "City 1",
       "State 1",
-      "Zipcode 1"
+      "ZipCode 1"
     );
     customer.changeAddress(address);
     await customerRepository.create(customer);
@@ -215,14 +215,14 @@ describe("Order repository test", () => {
 
     const orderModel = await OrderModel.findOne({
       where: { id: order.id },
-      include: ["itens"],
+      include: ["items"],
     });
 
     expect(orderModel.toJSON()).toStrictEqual({
       id: "123",
       customer_id: "123",
       total: order.total(),
-      itens: [
+      items: [
         {
           id: orderItem2.id,
           name: orderItem2.name,
@@ -246,7 +246,7 @@ describe("Order repository test", () => {
       1,
       "City 1",
       "State 1",
-      "Zipcode 1"
+      "ZipCode 1"
     );
     customer.changeAddress(address);
     await customerRepository.create(customer);
@@ -271,14 +271,14 @@ describe("Order repository test", () => {
 
     const orderModel = await OrderModel.findOne({
       where: { id: order.id },
-      include: ["itens"],
+      include: ["items"],
     });
 
     expect(orderModel.toJSON()).toStrictEqual({
       id: "123",
       customer_id: "123",
       total: order.total(),
-      itens: [
+      items: [
         {
           id: orderItem.id,
           name: orderItem.name,
@@ -302,7 +302,7 @@ describe("Order repository test", () => {
       1,
       "City 1",
       "State 1",
-      "Zipcode 1"
+      "ZipCode 1"
     );
     customer.changeAddress(address);
     await customerRepository.create(customer);
@@ -350,14 +350,14 @@ describe("Order repository test", () => {
 
     const orderModel = await OrderModel.findOne({
       where: { id: order.id },
-      include: ["itens"],
+      include: ["items"],
     });
 
     expect(orderModel.toJSON()).toStrictEqual({
       id: "123",
       customer_id: "123",
       total: order.total(),
-      itens: [
+      items: [
         {
           id: orderItem1.id,
           name: orderItem1.name,
@@ -388,7 +388,7 @@ describe("Order repository test", () => {
       1,
       "City 1",
       "State 1",
-      "Zipcode 1"
+      "ZipCode 1"
     );
     customer.changeAddress(address);
     await customerRepository.create(customer);
@@ -423,7 +423,7 @@ describe("Order repository test", () => {
       1,
       "City 1",
       "State 1",
-      "Zipcode 1"
+      "ZipCode 1"
     );
     customer1.changeAddress(address1);
 
@@ -433,7 +433,7 @@ describe("Order repository test", () => {
       2,
       "City 2",
       "State 2",
-      "Zipcode 2"
+      "ZipCode 2"
     );
     customer2.changeAddress(address2);
 

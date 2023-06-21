@@ -5,6 +5,6 @@ export default class SendEmailWhenCustomerIsCreated2Handler
   implements EventHandlerInterface<customerCreatedEvent>
 {
   handle(event: customerCreatedEvent): void {
-    console.log("Esse é o segundo console.log do evento: CustomerCreated");
+    console.log("This is the second console.log of the event: CustomerCreated");
   }
 }

@@ -5,5 +5,5 @@ export default interface OrderInterface {
 
   get customerId(): string;
 
-  get itens(): OrderItem[];
+  get items(): OrderItem[];
 }

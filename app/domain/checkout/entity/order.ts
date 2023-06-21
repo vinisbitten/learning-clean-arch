@@ -1,16 +1,16 @@
-import OrderInterface from "./order.interface";
 import OrderItem from "./order-item";
+import OrderInterface from "./order.interface";
 
 export default class Order implements OrderInterface {
   private _id: string;
   private _customer: string;
-  private _itens: OrderItem[];
+  private _items: OrderItem[];
   private _total: number;
 
-  constructor(id: string, customer: string, itens: OrderItem[]) {
+  constructor(id: string, customer: string, items: OrderItem[]) {
     this._id = id;
     this._customer = customer;
-    this._itens = itens;
+    this._items = items;
     this._total = this.total();
     this.validate();
   }
@@ -22,10 +22,10 @@ export default class Order implements OrderInterface {
     if (this._customer.length == 0) {
       throw new Error("Customer is required");
     }
-    if (this._itens.length == 0) {
-      throw new Error("Must have 1 or more itens");
+    if (this._items.length == 0) {
+      throw new Error("Must have 1 or more items");
     }
-    if (this._itens.some((item) => item.quantity <= 0)) {
+    if (this._items.some((item) => item.quantity <= 0)) {
       throw new Error("Quantity must be greater than 0");
     }
 
@@ -33,8 +33,8 @@ export default class Order implements OrderInterface {
   }
 
   total(): number {
-    return this._itens.reduce(
-      (total, item) => total + item.orderitemTotal(),
+    return this._items.reduce(
+      (total, item) => total + item.orderItemTotal(),
       0
     );
   }
@@ -47,8 +47,8 @@ export default class Order implements OrderInterface {
     return this._customer;
   }
 
-  get itens(): OrderItem[] {
-    return this._itens;
+  get items(): OrderItem[] {
+    return this._items;
   }
 
   set id(id: string) {
@@ -56,19 +56,19 @@ export default class Order implements OrderInterface {
   }
 
   addItem(item: OrderItem): void {
-    this._itens.push(item);
+    this._items.push(item);
     this._total = this.total();
     this.validate();
   }
 
   removeItem(id: string): void {
-    this._itens = this._itens.filter((item) => item.id !== id);
+    this._items = this._items.filter((item) => item.id !== id);
     this._total = this.total();
     this.validate();
   }
 
   changeItemQuantity(id: string, quantity: number): void {
-    let item = this._itens.find((item) => item.id === id);
+    let item = this._items.find((item) => item.id === id);
     if (item) {
       item.changeQuantity(quantity);
       this._total = this.total();

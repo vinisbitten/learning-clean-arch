@@ -31,7 +31,7 @@ describe("Customer repository test", () => {
       1,
       "City 1",
       "State 1",
-      "Zipcode 1"
+      "ZipCode 1"
     );
     customer.changeAddress(address);
 
@@ -48,7 +48,7 @@ describe("Customer repository test", () => {
       rewardPoints: customer.rewardPoints,
       street: customer.address.street,
       number: customer.address.number,
-      zipcode: customer.address.zip,
+      zipCode: customer.address.zip,
       city: customer.address.city,
       state: customer.address.state,
     });
@@ -62,7 +62,7 @@ describe("Customer repository test", () => {
       1,
       "City 1",
       "State 1",
-      "Zipcode 1"
+      "ZipCode 1"
     );
     customer.changeAddress(address);
 
@@ -70,7 +70,7 @@ describe("Customer repository test", () => {
 
     customer.changeName("John Doe 2");
     customer.changeAddress(
-      new Address("Street 2", 2, "City 2", "State 2", "Zipcode 2")
+      new Address("Street 2", 2, "City 2", "State 2", "ZipCode 2")
     );
     customer.activate();
 
@@ -86,7 +86,7 @@ describe("Customer repository test", () => {
       rewardPoints: customer.rewardPoints,
       street: customer.address.street,
       number: customer.address.number,
-      zipcode: customer.address.zip,
+      zipCode: customer.address.zip,
       city: customer.address.city,
       state: customer.address.state,
     });
@@ -100,7 +100,7 @@ describe("Customer repository test", () => {
       1,
       "City 1",
       "State 1",
-      "Zipcode 1"
+      "ZipCode 1"
     );
     customer.changeAddress(address);
     await customerRepository.create(customer);
@@ -118,7 +118,7 @@ describe("Customer repository test", () => {
       1,
       "City 1",
       "State 1",
-      "Zipcode 1"
+      "ZipCode 1"
     );
     customer1.changeAddress(address1);
     const customer2 = new Customer("456", "John Doe 2");
@@ -127,7 +127,7 @@ describe("Customer repository test", () => {
       2,
       "City 2",
       "State 2",
-      "Zipcode 2"
+      "ZipCode 2"
     );
     customer2.changeAddress(address2);
 

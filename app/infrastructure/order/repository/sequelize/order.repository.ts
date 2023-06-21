@@ -11,7 +11,7 @@ export default class OrderRepository implements OrderRepositoryInterface {
         id: order.id,
         customer_id: order.customerId,
         total: order.total(),
-        itens: order.itens.map((item) => ({
+        items: order.items.map((item) => ({
           id: item.id,
           name: item.name,
           price: item.price,
@@ -86,10 +86,10 @@ export default class OrderRepository implements OrderRepositoryInterface {
   async update(order: Order): Promise<void> {
     const oldOrder = await OrderModel.findOne({
       where: { id: order.id },
-      include: ["itens"],
+      include: ["items"],
     });
 
-    const oldOrderItens = oldOrder.itens.map((item) => {
+    const oldOrderItems = oldOrder.items.map((item) => {
       return new OrderItem(
         item.id,
         item.name,
@@ -99,16 +99,16 @@ export default class OrderRepository implements OrderRepositoryInterface {
       );
     });
 
-    for (const item of oldOrderItens) {
-      const match = order.itens.find((i) => i.id === item.id);
+    for (const item of oldOrderItems) {
+      const match = order.items.find((i) => i.id === item.id);
 
       if (!match) {
         await this.deleteOrderItem(order, item);
       }
     }
 
-    for (const item of order.itens) {
-      const match = oldOrderItens.find((i) => i.id === item.id);
+    for (const item of order.items) {
+      const match = oldOrderItems.find((i) => i.id === item.id);
 
       if (!match) {
         await this.addOrderItem(order, item);
@@ -122,7 +122,7 @@ export default class OrderRepository implements OrderRepositoryInterface {
         id: order.id,
         customer_id: order.customerId,
         total: order.total(),
-        itens: order.itens.map((item) => ({
+        items: order.items.map((item) => ({
           id: item.id,
           name: item.name,
           price: item.price,
@@ -139,10 +139,10 @@ export default class OrderRepository implements OrderRepositoryInterface {
   async find(id: string): Promise<Order> {
     const orderModel = await OrderModel.findOne({
       where: { id: id },
-      include: ["itens"],
+      include: ["items"],
     });
 
-    const orderItens = orderModel.itens.map((item) => {
+    const orderItems = orderModel.items.map((item) => {
       return new OrderItem(
         item.id,
         item.name,
@@ -152,18 +152,18 @@ export default class OrderRepository implements OrderRepositoryInterface {
       );
     });
 
-    const order = new Order(orderModel.id, orderModel.customer_id, orderItens);
+    const order = new Order(orderModel.id, orderModel.customer_id, orderItems);
 
     return order;
   }
 
   async findAll(): Promise<Order[]> {
     const orderModels = await OrderModel.findAll({
-      include: ["itens"],
+      include: ["items"],
     });
 
     const orders = orderModels.map((orderModel) => {
-      const orderItens = orderModel.itens.map((item) => {
+      const orderItems = orderModel.items.map((item) => {
         return new OrderItem(
           item.id,
           item.name,
@@ -176,7 +176,7 @@ export default class OrderRepository implements OrderRepositoryInterface {
       const order = new Order(
         orderModel.id,
         orderModel.customer_id,
-        orderItens
+        orderItems
       );
 
       return order;

@@ -19,7 +19,7 @@ describe("ProductFactory unity test", () => {
     expect(product.constructor.name).toBe("ProductB");
   });
 
-  it("should trhow an error when type is not valid", () => {
+  it("should throw an error when type is not valid", () => {
     expect(() => {
       ProductFactory.create("c", "Product C", 10);
     }).toThrowError("Invalid product type");

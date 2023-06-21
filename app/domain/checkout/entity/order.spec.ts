@@ -14,10 +14,10 @@ describe("Order unit test", () => {
     }).toThrowError("Customer is required");
   });
 
-  it("should have a valid itens", () => {
+  it("should have a valid items", () => {
     expect(() => {
       let order = new Order("123", "123", []);
-    }).toThrowError("Must have 1 or more itens");
+    }).toThrowError("Must have 1 or more items");
   });
 
   it("item should have a valid quantity", () => {
@@ -31,14 +31,14 @@ describe("Order unit test", () => {
     let item1 = new OrderItem("123", "123", 10, "123", 1);
     let item2 = new OrderItem("123", "123", 20, "123", 2);
 
-    let itens = [item1];
+    let items = [item1];
 
-    let order1 = new Order("123", "123", itens);
+    let order1 = new Order("123", "123", items);
     expect(order1.total()).toBe(10);
 
-    itens.push(item2);
+    items.push(item2);
 
-    let order2 = new Order("123", "123", itens);
+    let order2 = new Order("123", "123", items);
     expect(order2.total()).toBe(50);
   });
 });

@@ -6,11 +6,11 @@ export default class SendEmailWhenCustomerAddressIsChangedHandler
 {
   handle(event: customerAddressChangedEvent): void {
     console.log(
-      "Endereço do cliente: " +
+      "Client address: " +
         event.eventData.id +
         ", " +
         event.eventData.name +
-        " alterado para " +
+        " altered to " +
         event.eventData.address
     );
   }

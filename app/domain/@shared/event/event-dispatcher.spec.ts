@@ -10,7 +10,7 @@ import SendEmailWhenCustomerIsCreated2Handler from "../../customer/event/handler
 import CustomerAddressChangedEvent from "../../customer/event/customer-address-changed.event";
 import SendEmailWhenCustomerAddressIsChangedHandler from "../../customer/event/handler/send-email-when-customer-address-is-changed.handler";
 
-import Address from "../../customer/value-object/address"
+import Address from "../../customer/value-object/address";
 import Customer from "../../customer/entity/customer";
 
 describe("Domain events tests", () => {
@@ -68,7 +68,7 @@ describe("Domain events tests", () => {
   it("should notify product created event", async () => {
     const eventDispatcher = new EventDispatcher();
     const eventHandler = new SendEmailWhenProductIsCreatedHandler();
-    const spyEventhandler = jest.spyOn(eventHandler, "handle");
+    const spyEventHandler = jest.spyOn(eventHandler, "handle");
 
     eventDispatcher.register("productCreatedEvent", eventHandler);
 
@@ -82,18 +82,18 @@ describe("Domain events tests", () => {
       price: 10.0,
     });
 
-    // Quando o notify for executado o SendEmailWhenProductIsCreatedHandler() deve ser chamado
+    // When the notify is executed the SendEmailWhenProductIsCreatedHandler() should be called
     eventDispatcher.notify(productCreatedEvent);
 
-    expect(spyEventhandler).toHaveBeenCalled();
+    expect(spyEventHandler).toHaveBeenCalled();
   });
 
   it("should notify customer created event", async () => {
     const eventDispatcher = new EventDispatcher();
     const eventHandler1 = new SendEmailWhenCustomerIsCreated1Handler();
     const eventHandler2 = new SendEmailWhenCustomerIsCreated2Handler();
-    const spyEventhandler1 = jest.spyOn(eventHandler1, "handle");
-    const spyEventhandler2 = jest.spyOn(eventHandler2, "handle");
+    const spyEventHandler1 = jest.spyOn(eventHandler1, "handle");
+    const spyEventHandler2 = jest.spyOn(eventHandler2, "handle");
 
     eventDispatcher.register("customerCreatedEvent", eventHandler1);
     eventDispatcher.register("customerCreatedEvent", eventHandler2);
@@ -108,14 +108,14 @@ describe("Domain events tests", () => {
 
     eventDispatcher.notify(customerCreatedEvent);
 
-    expect(spyEventhandler1).toHaveBeenCalled();
-    expect(spyEventhandler2).toHaveBeenCalled();
+    expect(spyEventHandler1).toHaveBeenCalled();
+    expect(spyEventHandler2).toHaveBeenCalled();
   });
 
   it("should notify customer address changed event", async () => {
     const eventDispatcher = new EventDispatcher();
     const eventHandler = new SendEmailWhenCustomerAddressIsChangedHandler();
-    const spyEventhandler = jest.spyOn(eventHandler, "handle");
+    const spyEventHandler = jest.spyOn(eventHandler, "handle");
 
     eventDispatcher.register("customerAddressChangedEvent", eventHandler);
 
@@ -133,6 +133,6 @@ describe("Domain events tests", () => {
 
     eventDispatcher.notify(customerAddressChangedEvent);
 
-    expect(spyEventhandler).toHaveBeenCalled();
+    expect(spyEventHandler).toHaveBeenCalled();
   });
 });

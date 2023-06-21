@@ -5,7 +5,7 @@ import OrderInterface from "../entity/order.interface";
 interface OrderFactoryProps {
   id: string;
   customerId: string;
-  itens: {
+  items: {
     id: string;
     name: string;
     productId: string;
@@ -16,7 +16,7 @@ interface OrderFactoryProps {
 
 export default class OrderFactory {
   public static create(props: OrderFactoryProps): OrderInterface {
-    const itens = props.itens.map(
+    const items = props.items.map(
       (item) =>
         new OrderItem(
           item.id,
@@ -26,6 +26,6 @@ export default class OrderFactory {
           item.quantity
         )
     );
-    return new Order(props.id, props.customerId, itens);
+    return new Order(props.id, props.customerId, items);
   }
 }

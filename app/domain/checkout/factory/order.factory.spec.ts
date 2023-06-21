@@ -6,7 +6,7 @@ describe("OrderFactory unit tests", () => {
     const orderProps = {
       id: uuid(),
       customerId: uuid(),
-      itens: [
+      items: [
         {
           id: uuid(),
           name: "Product 1",
@@ -22,6 +22,6 @@ describe("OrderFactory unit tests", () => {
     expect(order).toBeDefined();
     expect(order.id).toBe(orderProps.id);
     expect(order.customerId).toBe(orderProps.customerId);
-    expect(order.itens).toHaveLength(1);
+    expect(order.items).toHaveLength(1);
   });
 });
