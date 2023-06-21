@@ -1,5 +1,5 @@
 import RepositoryInterface from "../../@shared/repository/repository-interface";
-import Product from "../entity/product-a";
+import AbstractProduct from "../entity/product.abstract";
 
 export default interface ProductRepositoryInterface
-  extends RepositoryInterface<Product> {}
+  extends RepositoryInterface<AbstractProduct> {}
