@@ -1,9 +1,9 @@
 import ProductInterface from "./product.interface";
 
-export default class Product implements ProductInterface{
-  private _id: string;
-  private _name: string;
-  private _price: number;
+export default abstract class AbstractProduct implements ProductInterface {
+  protected _id: string;
+  protected _name: string;
+  protected _price: number;
 
   constructor(id: string, name: string, price: number) {
     this._id = id;
@@ -12,17 +12,16 @@ export default class Product implements ProductInterface{
     this.validate();
   }
 
-  validate(): boolean {
-    if (this._name.length == 0) {
+  protected validate(): void {
+    if (this._name.length === 0) {
       throw new Error("Name is required");
     }
-    if (this._id.length == 0) {
+    if (this._id.length === 0) {
       throw new Error("Id is required");
     }
     if (this._price <= 0) {
       throw new Error("Price must be greater than 0");
     }
-    return true;
   }
 
   changeName(name: string): void {
@@ -43,7 +42,5 @@ export default class Product implements ProductInterface{
     return this._name;
   }
 
-  get price(): number {
-    return this._price;
-  }
+  abstract get price(): number;
 }

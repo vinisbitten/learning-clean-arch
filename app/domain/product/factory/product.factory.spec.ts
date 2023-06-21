@@ -7,7 +7,7 @@ describe("ProductFactory unity test", () => {
     expect(product).toBeDefined();
     expect(product.name).toBe("Product A");
     expect(product.price).toBe(10);
-    expect(product.constructor.name).toBe("Product");
+    expect(product.constructor.name).toBe("ProductA");
   });
 
   it("should create a product type b", () => {
