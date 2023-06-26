@@ -50,7 +50,9 @@ describe("Test create customer use case", () => {
 
     input.name = "";
 
-    await expect(usecase.execute(input)).rejects.toThrow("Name is required");
+    await expect(usecase.execute(input)).rejects.toThrow(
+      "customer: name is required"
+    );
   });
 
   it("should throw an error when address is invalid", async () => {

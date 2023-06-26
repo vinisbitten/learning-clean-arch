@@ -4,19 +4,19 @@ describe("Product unit test", () => {
   it("should have a valid id", () => {
     expect(() => {
       let product = new ProductA("", "Product 1", 100);
-    }).toThrowError("Id is required");
+    }).toThrowError("product: id is required");
   });
 
   it("should have a valid name", () => {
     expect(() => {
       let product = new ProductA("123", "", 100);
-    }).toThrowError("Name is required");
+    }).toThrowError("product: name is required");
   });
 
   it("should have a valid price", () => {
     expect(() => {
       let product = new ProductA("123", "Product 1", 0);
-    }).toThrowError("Price must be greater than 0");
+    }).toThrowError("product: price must be greater than 0");
   });
 
   it("should change name", () => {
