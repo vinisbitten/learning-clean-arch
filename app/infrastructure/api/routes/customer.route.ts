@@ -1,9 +1,10 @@
 import express, { Request, Response } from "express";
 import CreateCustomerUsecase from "../../../usecase/customer/create/create.customer.usecase";
-import ListCustomerUsecase from "../../../usecase/customer/list/list.customer.usecase";
-import CustomerRepository from "../../customer/repository/sequelize/customer.repository";
 import FindCustomerUsecase from "../../../usecase/customer/find/find.customer.usecase";
+import ListCustomerUsecase from "../../../usecase/customer/list/list.customer.usecase";
 import UpdateCustomerUsecase from "../../../usecase/customer/update/update.customer.usecase";
+import CustomerRepository from "../../customer/repository/sequelize/customer.repository";
+import CustomerPresenter from "../presenters/customer.presenter";
 
 export const customerRoute = express.Router();
 
@@ -31,12 +32,15 @@ customerRoute.post("/", async (req: Request, res: Response) => {
 
 customerRoute.get("/", async (req: Request, res: Response) => {
   const usecase = new ListCustomerUsecase(new CustomerRepository());
+
   try {
     const listCustomerDTO = {};
-
     const output = await usecase.execute(listCustomerDTO);
-    res.status(200);
-    res.send(output);
+
+    res.format({
+      json: async () => res.send(output),
+      xml: async () => res.send(CustomerPresenter.listXML(output)),
+    });
   } catch (err) {
     res.status(500).send(err);
   }
@@ -58,24 +62,24 @@ customerRoute.get("/:id", async (req: Request, res: Response) => {
 });
 
 customerRoute.put("/:id", async (req: Request, res: Response) => {
-    const usecase = new UpdateCustomerUsecase(new CustomerRepository());
-    try {
-        const updateCustomerDTO = {
-            id: req.params.id,
-            name: req.body.name,
-            address: {
-                street: req.body.address.street,
-                number: req.body.address.number,
-                city: req.body.address.city,
-                state: req.body.address.state,
-                zip: req.body.address.zip,
-            },
-        };
+  const usecase = new UpdateCustomerUsecase(new CustomerRepository());
+  try {
+    const updateCustomerDTO = {
+      id: req.params.id,
+      name: req.body.name,
+      address: {
+        street: req.body.address.street,
+        number: req.body.address.number,
+        city: req.body.address.city,
+        state: req.body.address.state,
+        zip: req.body.address.zip,
+      },
+    };
 
-        const output = await usecase.execute(updateCustomerDTO);
-        res.status(200);
-        res.send(output);
-    } catch (err) {
-        res.status(500).send(err);
-    }
+    const output = await usecase.execute(updateCustomerDTO);
+    res.status(200);
+    res.send(output);
+  } catch (err) {
+    res.status(500).send(err);
+  }
 });
