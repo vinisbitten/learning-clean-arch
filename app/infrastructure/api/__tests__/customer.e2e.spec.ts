@@ -177,4 +177,48 @@ describe("End to end test for customer", () => {
       },
     });
   });
+
+  it("should list all customers in XML", async () => {
+    const respCustomer1 = await request(app)
+      .post("/customer")
+      .send({
+        name: "John",
+        address: {
+          street: "Main Street",
+          number: 123,
+          city: "New York",
+          state: "NY",
+          zip: "12345",
+        },
+      });
+    expect(respCustomer1.status).toBe(201);
+
+    const respCustomer2 = await request(app)
+      .post("/customer")
+      .send({
+        name: "Mary",
+        address: {
+          street: "Another Street",
+          number: 456,
+          city: "Atlanta",
+          state: "GA",
+          zip: "67890",
+        },
+      });
+    expect(respCustomer2.status).toBe(201);
+
+    const response = await request(app)
+      .get("/customer")
+      .set("Accept", "application/xml")
+      .send();
+
+    expect(response.status).toBe(200);
+    expect(response.text).toContain(`<?xml version="1.0" encoding="UTF-8"?>`);
+    expect(response.text).toContain(`<customers>`);
+    expect(response.text).toContain(`<customer>`);
+    expect(response.text).toContain(`<id>${respCustomer1.body.id}</id>`);
+    expect(response.text).toContain(`<name>John</name>`);
+    expect(response.text).toContain(`<id>${respCustomer2.body.id}</id>`);
+    expect(response.text).toContain(`<name>Mary</name>`);
+  });
 });
